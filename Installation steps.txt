@@ -25,3 +25,8 @@ for YEAR in {2020..2024}; do
 
     echo "Completed $YEAR"
 done
+
+# downloading a particular year data
+aws s3 sync \
+  s3://noaa-gsod-pds/2022/ \
+  s3://your-bucket-name/noaa-gsod/2022/
