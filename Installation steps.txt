@@ -1,0 +1,27 @@
+# INSTALL MISC DEPENDENCIES                #
+############################################
+sudo apt update && sudo apt install -y uuid-runtime
+
+############################################
+# CONFIGURE AWS CLI                        #
+############################################
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/home/codespace/awscliv2.zip"
+unzip /home/codespace/awscliv2.zip -d /home/codespace
+sudo /home/codespace/aws/install
+
+aws configure
+
+# verifying Aws credentials
+aws sts get-caller-identity
+
+BUCKET_NAME="agabweatherdataset"
+
+for YEAR in {2020..2024}; do
+    echo "Copying NOAA data for $YEAR..."
+
+    aws s3 sync \
+        "s3://noaa-gsod-pds/$YEAR/" \
+        "s3://$BUCKET_NAME/noaa-gsod/$YEAR/"
+
+    echo "Completed $YEAR"
+done
