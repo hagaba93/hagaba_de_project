@@ -1,0 +1,2 @@
+# For PySpark 3.5.6, first check the Hadoop version:
+python -c "import pyspark; print(pyspark.__file__)"

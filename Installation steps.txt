@@ -30,3 +30,30 @@ done
 aws s3 sync \
   s3://noaa-gsod-pds/2022/ \
   s3://your-bucket-name/noaa-gsod/2022/
+
+# checking for the variable
+echo $BUCKET_NAME
+
+# Spark and Java Installation
+cd
+mkdir data_engineering
+cd data_engineering
+
+source .venv/bin/activate
+source activate_spark.sh
+spark-submit --version
+
+
+cat > activate_spark.sh <<'EOF'
+source activate_spark.sh
+
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+export PATH="$JAVA_HOME/bin:$PATH"
+
+aws s3 ls s3://$BUCKET_NAME/
+aws s3 ls s3://$BUCKET_NAME/noaa-gsod/
+
+python read_s3.py
+
+Columns ['STATION', 'DATE', 'LATITUDE', 'LONGITUDE', 'ELEVATION', 'NAME', 'TEMP', 'TEMP_ATTRIBUTES', 'DEWP', 'DEWP_ATTRIBUTES', 'SLP', 'SLP_ATTRIBUTES', 'STP', 'STP_ATTRIBUTES', 'VISIB', 'VISIB_ATTRIBUTES', 'WDSP', 'WDSP_ATTRIBUTES', 'MXSPD', 'GUST', 'MAX', 'MAX_ATTRIBUTES', 'MIN', 'MIN_ATTRIBUTES', 'PRCP', 'PRCP_ATTRIBUTES', 'SNDP', 'FRSHTT']
+Data types: [('STATION', 'int'), ('DATE', 'date'), ('LATITUDE', 'string'), ('LONGITUDE', 'string'), ('ELEVATION', 'string'), ('NAME', 'string'), ('TEMP', 'double'), ('TEMP_ATTRIBUTES', 'double'), ('DEWP', 'double'), ('DEWP_ATTRIBUTES', 'double'), ('SLP', 'double'), ('SLP_ATTRIBUTES', 'double'), ('STP', 'double'), ('STP_ATTRIBUTES', 'double'), ('VISIB', 'double'), ('VISIB_ATTRIBUTES', 'double'), ('WDSP', 'double'), ('WDSP_ATTRIBUTES', 'double'), ('MXSPD', 'double'), ('GUST', 'double'), ('MAX', 'double'), ('MAX_ATTRIBUTES', 'string'), ('MIN', 'double'), ('MIN_ATTRIBUTES', 'string'), ('PRCP', 'double'), ('PRCP_ATTRIBUTES', 'string'), ('SNDP', 'double'), ('FRSHTT', 'int')]
