@@ -1,0 +1,21 @@
+
+cd agab_de_prjct/data_engineering
+
+cd weather_transformations
+dbt debug
+
+
+-- Opening the profile.yml 
+code ~/.dbt/profiles.yml
+
+checking for remote connection
+git remote -v
+
+Running first weather_transformations
+dbt run --select weather_cleaned
+
+
+What to watch out for
+One important requirement is that your Bronze Auto Loader job must terminate after processing the available files. For this, your streaming write should use:
+
+.trigger(availableNow=True)

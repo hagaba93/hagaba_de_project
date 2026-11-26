@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: bronze
+    database: weather_project
+    schema: bronze
+
+    tables:
+      - name: noaa_weather_raw
+        description: >
+          Raw NOAA GSOD weather data ingested
+          from Amazon S3 using Databricks Auto Loader.
