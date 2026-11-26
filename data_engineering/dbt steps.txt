@@ -11,6 +11,8 @@ code ~/.dbt/profiles.yml
 checking for remote connection
 git remote -v
 
+git add -u
+
 Running first weather_transformations
 dbt run --select weather_cleaned
 

@@ -38,7 +38,7 @@ for YEAR in $(seq "$START_YEAR" "$END_YEAR"); do
 
     aws s3 sync \
         "$YEAR_DIR/" \
-        "s3://$DEST_BUCKET/$DEST_PREFIX/$YEAR/" \
+        "s3://$DEST_BUCKET/$DEST_PREFIX/$YEAR/reload_v1/" \
         --only-show-errors
 
     echo "Upload completed for $YEAR"

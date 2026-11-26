@@ -2,7 +2,7 @@
 set -euo pipefail
 
 # Configuration
-YEAR=2025
+YEAR=2024
 SOURCE_BUCKET="noaa-gsod-pds"
 DEST_BUCKET="weazdataeng20"
 TEMP_DIR="/tmp/noaa-weather/$YEAR"
@@ -26,7 +26,7 @@ echo "Uploading NOAA $YEAR data to S3..."
 
 aws s3 sync \
   "$TEMP_DIR/" \
-  "s3://$DEST_BUCKET/noaa-gsod/$YEAR/" \
+  "s3://$DEST_BUCKET/noaa-gsod/$YEAR/reload_v1/" \
   --only-show-errors
 
 echo "Upload completed successfully!"
